@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../images/logo.png';
 import './Header.css';
+import { FaCartArrowDown } from 'react-icons/fa';
 
 const Header = () => {
     return (
@@ -15,9 +16,12 @@ const Header = () => {
                         <img src={Logo} alt="Hot Onion Logo" />
                     </Link>
 
-                    <ul className="navbar-nav align-items-center">
+                    <ul className="navbar-nav align-items-center ms-auto">
                         <li className="nav-item active">
-                            <Link to="/checkout" className="nav-link"><span className="badge bg-light">0</span></Link>
+                            <Link to="/checkout" className="nav-link">
+                                <FaCartArrowDown style={{ color: '#000', fontSize: 20 }} />
+                                <span className="ms-1">0</span>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/login" className="nav-link">Login</Link>

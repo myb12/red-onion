@@ -1,22 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import useFoods from '../../hooks/useFoods';
 import FoodItem from '../FoodItem/FoodItem';
 import './Foods.css'
 
 const Foods = () => {
-    const [foods, setFoods] = useState([]);
+    const [foods] = useFoods();
     const [foodType, setFoodType] = useState("Breakfast");
 
-    useEffect(() => {
-        fetch('/Data/foods.json')
-            .then(res => res.json())
-            .then(data => setFoods(data))
-    }, [])
+
 
     // console.log(foods);
     // console.log(foodType);
 
     const filteredFoods = foods.filter(food => food.type === foodType);
-    console.log(filteredFoods);
+    // console.log(filteredFoods);
 
 
     return (

@@ -3,10 +3,11 @@
     color: black;
     cursor: pointer;
     font-weight: 600;
+    position: relative;
 }
 
 .food-area nav li span:hover{
-    color: red;
+    color: #000;
 }
 .food-area nav .active{
     color: red;
@@ -16,9 +17,31 @@
     content: "";
     width: 80%;
     margin: 0 auto;
-    height: 2px;
+    height: 3px;
+    position: absolute;
+    bottom: 8px;
+    left: 10%;
     background-color: rgb(255, 69, 101);
     display: block;
+}
+
+.food-area nav .nav-link:before{
+    content: "";
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    visibility: hidden;
+    background: rgb(255, 69, 101);
+    transition: all 0.5s ease-out;
+}
+
+.food-area nav .nav-link:hover:before {
+    width: 80%;
+    height: 3px;
+    visibility: visible;
 }
 .food-area .card{
     height: 100%;
