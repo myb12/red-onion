@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import useCart from '../../hooks/useCart';
 import useFoods from '../../hooks/useFoods';
 import FoodItem from '../FoodItem/FoodItem';
 import './Foods.css'
@@ -6,8 +8,9 @@ import './Foods.css'
 const Foods = () => {
     const [foods] = useFoods();
     const [foodType, setFoodType] = useState("Breakfast");
+    const cart = useCart();
 
-    // console.log(foods);
+    console.log(cart);
     // console.log(foodType);
 
     const filteredFoods = foods.filter(food => food.type === foodType);
@@ -37,18 +40,18 @@ const Foods = () => {
                         filteredFoods.map(food => <FoodItem key={food.id} food={food} />)
                     }
                 </div>
-                {/* <div className="text-center">
+                <div className="text-center">
                     {
-                        props.cart.length ?
+                        cart[0].length ?
                             <Link to="/checkout">
-                                <button className="btn btn-danger btn-secondary">Check Out Your Food</button>
+                                <button className="btn btn-danger">Check Out Your Food</button>
                             </Link>
                             :
                             <button disabled className="btn btn-secondary">Check Out Your Food</button>
 
                     }
 
-                </div> */}
+                </div>
             </div>
         </section>
     );

@@ -1,12 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../images/logo.png';
 import './Header.css';
 import { FaCartArrowDown } from 'react-icons/fa';
-import { CartContext } from '../../context/CartContextProvider';
+import useCart from '../../hooks/useCart';
+import useAuth from '../../hooks/useAuth';
 
 const Header = () => {
-    const [cart] = useContext(CartContext);
+    const [cart] = useCart();
+    const { user, logOut } = useAuth();
+    console.log(user);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light  fixed-top">
@@ -26,16 +29,28 @@ const Header = () => {
                                 <span className="ms-1">{cart.length}</span>
                             </Link>
                         </li>
+
                         <li className="nav-item">
-                            <Link to="/login" className="nav-link">Login</Link>
+                            {
+                                user.email ?
+
+                                    (<Link to="/" className="nav-link"><img style={{ borderRadius: '50%', width: 30 }} src={user.photoURL} alt="" /> {user.displayName}</Link>)
+                                    :
+                                    <Link to="/login" className="nav-link">Login</Link>
+                            }
                         </li>
+
                         <li className="nav-item">
-                            {/* <Link to="/" className="nav-link">
-                                <button className="btn btn-danger btn-rounded">Sign Out</button>
-                            </Link> */}
-                            <Link to="/login" className="nav-link">
-                                <button className="btn btn-danger btn-rounded">Sign Up</button>
-                            </Link>
+                            {
+                                user.email ?
+                                    <Link to="/" className="nav-link">
+                                        <button onClick={() => { logOut() }} className="btn btn-danger btn-rounded">Sign Out</button>
+                                    </Link>
+                                    :
+                                    <Link to="/login" className="nav-link">
+                                        <button className="btn btn-danger btn-rounded">Sign Up</button>
+                                    </Link>
+                            }
                         </li>
                     </ul>
                 </div>

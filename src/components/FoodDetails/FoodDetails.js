@@ -1,7 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { FaCartArrowDown, FaCheckCircle } from 'react-icons/fa';
 import { useParams } from 'react-router';
-import { CartContext } from '../../context/CartContextProvider';
+import { Link } from 'react-router-dom';
+import useCart from '../../hooks/useCart';
 import useFoods from '../../hooks/useFoods';
 import './FoodDetails.css';
 
@@ -10,7 +11,7 @@ const FoodDetails = () => {
     const [quantity, setQuantity] = useState(1);
     const [success, setSuccess] = useState(false);
     const [bigImageIndex, setBigImageIndex] = useState(0);
-    const [cart, setCart] = useContext(CartContext);
+    const [cart, setCart] = useCart();
 
 
     const { foodId } = useParams();
@@ -39,6 +40,8 @@ const FoodDetails = () => {
     // console.log(cart);
     success && setTimeout(() => setSuccess(false), 1500);
 
+    console.log(cart);
+
 
 
     return (
@@ -59,9 +62,11 @@ const FoodDetails = () => {
 
                         <div className="action d-flex align-items-center">
                             <button className="btn btn-danger btn-rounded mb-2" onClick={() => handleCart(specificFood)}><FaCartArrowDown style={{ color: '#fff', fontSize: 20 }} /> Add</button>
+                            {
+                                cart?.length && <Link to="/checkout"><button className="btn btn-danger btn-rounded mb-2 ms-2">Check Out Your Food</button></Link>
+                            }
                             {success &&
                                 <p className="ms-3 success-msg text-success"><FaCheckCircle />  Item added to Cart</p>
-
                             }
                         </div>
 
