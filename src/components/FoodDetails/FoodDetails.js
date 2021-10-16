@@ -63,7 +63,7 @@ const FoodDetails = () => {
                         <div className="action d-flex align-items-center">
                             <button className="btn btn-danger btn-rounded mb-2" onClick={() => handleCart(specificFood)}><FaCartArrowDown style={{ color: '#fff', fontSize: 20 }} /> Add</button>
                             {
-                                cart?.length && <Link to="/checkout"><button className="btn btn-danger btn-rounded mb-2 ms-2">Check Out Your Food</button></Link>
+                                cart.length ? <Link to="/checkout"><button className="btn btn-danger btn-rounded mb-2 ms-2">Check Out Your Food</button></Link> : <button disabled className="btn btn-secondary btn-rounded mb-2 ms-2">Check Out Your Food</button>
                             }
                             {success &&
                                 <p className="ms-3 success-msg text-success"><FaCheckCircle />  Item added to Cart</p>

@@ -9,9 +9,11 @@ import './SignUp.css'
 export default function SignUp() {
     const [returnUser, setReturnUser] = useState(false);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const { signInUsingGoogle } = useAuth();
+    const { user, signInUsingGoogle } = useAuth();
     const history = useHistory();
     const location = useLocation();
+
+    console.log(user);
 
     const onSubmit = (data) => {
         console.log(data);

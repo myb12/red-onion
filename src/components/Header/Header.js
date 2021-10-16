@@ -9,7 +9,7 @@ import useAuth from '../../hooks/useAuth';
 const Header = () => {
     const [cart] = useCart();
     const { user, logOut } = useAuth();
-    console.log(user);
+    // console.log(user);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light  fixed-top">
