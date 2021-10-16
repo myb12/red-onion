@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../images/logo.png';
 import './Header.css';
 import { FaCartArrowDown } from 'react-icons/fa';
+import { CartContext } from '../../context/CartContextProvider';
 
 const Header = () => {
+    const [cart] = useContext(CartContext);
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light  fixed-top">
             <div className="container-fluid">
@@ -20,7 +23,7 @@ const Header = () => {
                         <li className="nav-item active">
                             <Link to="/checkout" className="nav-link">
                                 <FaCartArrowDown style={{ color: '#000', fontSize: 20 }} />
-                                <span className="ms-1">0</span>
+                                <span className="ms-1">{cart.length}</span>
                             </Link>
                         </li>
                         <li className="nav-item">

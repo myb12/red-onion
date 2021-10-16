@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaCartArrowDown, FaCheckCircle } from 'react-icons/fa';
 import { useParams } from 'react-router';
+import { CartContext } from '../../context/CartContextProvider';
 import useFoods from '../../hooks/useFoods';
 import './FoodDetails.css';
 
@@ -9,12 +10,36 @@ const FoodDetails = () => {
     const [quantity, setQuantity] = useState(1);
     const [success, setSuccess] = useState(false);
     const [bigImageIndex, setBigImageIndex] = useState(0);
+    const [cart, setCart] = useContext(CartContext);
+
 
     const { foodId } = useParams();
     const specificFood = foods.find(food => food.id === +foodId);
-    console.log(specificFood);
+    // console.log(specificFood);
 
+
+    // const handleCart = () => {
+    //     setSuccess(true);
+    //     setCart(1)
+    //     return;
+    // }
+
+    const handleCart = (data) => {
+        const existing = cart.find(c => c.id === data.id);
+        const newCart = [...cart];
+        setCart(newCart);
+        if (existing) {
+            data.quantity += 1;
+        } else {
+            data.quantity = quantity;
+            newCart.push(data);
+        }
+        setCart(newCart);
+    }
+    // console.log(cart);
     success && setTimeout(() => setSuccess(false), 1500);
+
+
 
     return (
         <div className="food-details my-5 pt-5 container">
@@ -33,7 +58,7 @@ const FoodDetails = () => {
                         </div>
 
                         <div className="action d-flex align-items-center">
-                            <button className="btn btn-danger btn-rounded mb-2" onClick={() => setSuccess(true)}><FaCartArrowDown style={{ color: '#fff', fontSize: 20 }} /> Add</button>
+                            <button className="btn btn-danger btn-rounded mb-2" onClick={() => handleCart(specificFood)}><FaCartArrowDown style={{ color: '#fff', fontSize: 20 }} /> Add</button>
                             {success &&
                                 <p className="ms-3 success-msg text-success"><FaCheckCircle />  Item added to Cart</p>
 

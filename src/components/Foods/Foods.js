@@ -7,8 +7,6 @@ const Foods = () => {
     const [foods] = useFoods();
     const [foodType, setFoodType] = useState("Breakfast");
 
-
-
     // console.log(foods);
     // console.log(foodType);
 
