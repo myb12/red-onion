@@ -8,9 +8,9 @@ import Header from './components/Header/Header';
 function App() {
   return (
     <Router>
+      <Header />
       <Switch>
         <Route exact path="/">
-          <Header />
           <Banner />
           <Foods />
         </Route>
